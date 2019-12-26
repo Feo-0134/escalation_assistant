@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .serializers import *
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from django.contrib.auth.models import User
+from .permissions import IsOwner
 
 # Create your views here.
 class EngineerViewSet(viewsets.ModelViewSet):
@@ -15,6 +16,9 @@ class HighLvlViewSet(viewsets.ModelViewSet):
 class ProcessViewSet(viewsets.ModelViewSet):
     queryset = Process.objects.all()
     serializer_class = ProcessSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 class StageViewSet(viewsets.ModelViewSet):
     queryset = Stage.objects.all()

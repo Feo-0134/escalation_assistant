@@ -107,7 +107,7 @@ class Process(models.Model):
         ('PS', 'Pass'),
         ('NP', 'No Pass')
     ]
-
+    owner = models.ForeignKey('auth.User', related_name='process', on_delete=models.CASCADE)
     title = models.CharField(max_length=2, choices=PROCESS_TITLE)
     engineer = models.ForeignKey(Engineer, on_delete=models.CASCADE)
     status = models.CharField(max_length=2, choices=STATUS)

@@ -25,7 +25,8 @@ class StageSerializer(serializers.ModelSerializer):
 class ProcessSerializer(serializers.ModelSerializer):
     class Meta:
         model = Process
-        fields = ['id', 'title', 'engineer', 'status', 'stage']
+        owner = serializers.ReadOnlyField(source='owner.username')
+        fields = ['id', 'title', 'engineer', 'status', 'stage', 'owner']
 
 class ProcessLinkStageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -43,8 +44,8 @@ class MakeCommentOnSerializer(serializers.ModelSerializer):
         fields = ['id', 'highlvl', 'comment']
 
 class UserSerializer(serializers.ModelSerializer):
-    # snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
+    # process = serializers.PrimaryKeyRelatedField(many=True, queryset=Process.objects.all())
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'groups']
+        fields = ['id', 'username', 'process']
