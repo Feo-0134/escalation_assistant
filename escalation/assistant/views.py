@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .serializers import *
 from rest_framework import viewsets
+from django.contrib.auth.models import User
 
 # Create your views here.
 class EngineerViewSet(viewsets.ModelViewSet):
@@ -34,3 +35,7 @@ class StageLinkCommentViewSet(viewsets.ModelViewSet):
 class MakeCommentOnViewSet(viewsets.ModelViewSet):
     queryset = MakeCommentOn.objects.all()
     serializer_class = MakeCommentOnSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

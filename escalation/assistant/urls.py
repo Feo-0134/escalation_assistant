@@ -14,6 +14,7 @@ router.register(r'comment', views.CommentViewSet)
 router.register(r'pls', views.ProcessLinkStageViewSet)
 router.register(r'slc', views.StageLinkCommentViewSet)
 router.register(r'mkcmton', views.MakeCommentOnViewSet)
+router.register(r'users', views.UserViewSet)
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
