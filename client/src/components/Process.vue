@@ -67,7 +67,7 @@
                     Continue
                     </v-btn>
 
-                    <v-btn text @click="showDetailComment()">Edit</v-btn>
+                    <v-btn text @click="showDetailComment()">Edit Process</v-btn>
                 </v-stepper-content>
 
                 <v-stepper-content step="2">
@@ -91,7 +91,7 @@
                     Continue
                     </v-btn>
 
-                    <v-btn text @click="showDetailComment()">Edit</v-btn>
+                    <v-btn text @click="showDetailComment()">Edit Process</v-btn>
                 </v-stepper-content>
 
                 <v-stepper-content step="3">
@@ -115,7 +115,7 @@
                     Continue
                     </v-btn>
 
-                    <v-btn text @click="showDetailComment()">Edit</v-btn>
+                    <v-btn text @click="showDetailComment()">Edit Process</v-btn>
                 </v-stepper-content>
                 
                 <v-stepper-content step="4">
@@ -139,7 +139,7 @@
                     Continue
                     </v-btn>
 
-                    <v-btn text @click="showDetailComment()">Edit</v-btn>
+                    <v-btn text @click="showDetailComment()">Edit Process</v-btn>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>
@@ -197,9 +197,9 @@
                 // this.stage_id = (this.stage_list[this.stage - 1]).pk
                 this.detailShow = !this.detailShow
             },
-            // showDetailComment() {
-            //     this.$router.push(`/${this.process.stage[this.stage-1]}/cmt`) 
-            // }
+            showDetailComment() {
+                this.$router.push(`/${this.process.stage[this.stage-1]}/cmt`) 
+            }
         }
     }
 </script>

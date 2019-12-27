@@ -6,7 +6,8 @@
       <v-row
         justify="center"
       >
-      <Process v-for="(p, index) in process_list.results" :key="p._id"
+      <!-- {{process_list}} -->
+      <Process v-for="(p, index) in process_list" :key="p._id"
       :pindex="index" :process="p"
       style="width: 85%"
       >
@@ -20,7 +21,7 @@
             top
             right
             color="pink"
-            @click="route('apply')"
+            @click="initNewProcess()"
           >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
@@ -49,7 +50,7 @@
                 password:"!QA2ws3ed"
               }}
             );
-            return res.data
+            return res.data.results
           }catch(e) {
             // console.log(e);
           }
@@ -63,6 +64,46 @@
       route(path) {
         if (path == 'apply') {
           this.$router.push(`/apply`)
+        }
+      },
+      async initNewProcess() {
+        try {
+          // let that = this
+          const res = await this.$http.post(
+            'http://localhost:8000/assistant/process/',
+              {
+                title: "E0",
+                engineer: 1,
+                status: "S1",
+                owner: 2
+              },
+              {
+                auth: {
+                  username:"test_su0",
+                  password:"!QA2ws3ed"
+                }
+              }
+          );
+          // const res0 = await this.$http.post(
+          //   'http://localhost:8000/assistant/stage/',
+          //     {
+          //       title: "E0",
+          //       engineer: 1,
+          //       status: "S1",
+          //       owner: 2
+          //     },
+          //     {
+          //       auth: {
+          //         username:"test_su0",
+          //         password:"!QA2ws3ed"
+          //       }
+          //     }
+          // );
+          // window.console.log(res0.data)
+          location.reload();
+          return res.data
+        }catch(e) {
+          window.console.log(e);
         }
       }
     }

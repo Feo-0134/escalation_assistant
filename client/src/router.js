@@ -5,7 +5,7 @@ import DashBoard from './components/DashBoard'
 import Comment from './components/Comment'
 import Login from './components/Login'
 import Application from './components/Application'
-
+import CmtPool from './components/CmtPool'
 
 Vue.use(Router)
 
@@ -17,6 +17,11 @@ export default new Router({
             path: '/dsh',
             name: 'DashBoard',
             component: DashBoard
+        },
+        {
+            path: '/cmtpl',
+            name: 'CmtPool',
+            component: CmtPool
         },
         {
             path: '/apply',

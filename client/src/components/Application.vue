@@ -45,7 +45,7 @@
                 </v-toolbar-items>
             </v-toolbar>
             <v-col cols="12" sm="10" md="12">
-                <v-btn  class="mx-4" large color="primary">Apply</v-btn>
+                <v-btn  class="mx-4" large color="primary" @click="initNewProcess()">Apply</v-btn>
             </v-col>
         </v-col>
         </v-card-text>
@@ -64,5 +64,27 @@ export default {
         { title: 'Other' },
       ],
     }),
+    methods: {
+        async initNewProcess() {
+         try {
+            const res = await this.$http.post(
+              'http://localhost:8000/assistant/process/',{
+              data: {
+                  title: 'E1',
+                  engineer: 'Tommy Ford',
+                  status: 'S1',
+                  owner: 'Tommy Ford'
+              },
+              auth: {
+                username:"test_su0",
+                password:"!QA2ws3ed"
+              }}
+            );
+            return res.data
+          }catch(e) {
+            // console.log(e);
+          }
+        }
+    }
 }
 </script>

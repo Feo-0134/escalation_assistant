@@ -6,7 +6,7 @@ import vuetify from './plugins/vuetify';
 import AsyncComputed from 'vue-async-computed'
 
 Vue.use(AsyncComputed, {
-  default: 'Loading...'
+  default: {}
 });
 
 Vue.config.productionTip = false
