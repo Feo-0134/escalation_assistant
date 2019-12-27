@@ -64,27 +64,36 @@ export default {
         { title: 'Other' },
       ],
     }),
-    methods: {
-        async initNewProcess() {
-         try {
-            const res = await this.$http.post(
-              'http://localhost:8000/assistant/process/',{
-              data: {
-                  title: 'E1',
-                  engineer: 'Tommy Ford',
-                  status: 'S1',
-                  owner: 'Tommy Ford'
-              },
-              auth: {
-                username:"test_su0",
-                password:"!QA2ws3ed"
-              }}
-            );
-            return res.data
-          }catch(e) {
-            // console.log(e);
-          }
+    computed:{
+        processtitle() {
+            return this.processKind==='SE --> SEE' ? 'E0' : 'E1'
         }
+    },
+    methods: {
+      async initNewProcess() {
+        try {
+          // let that = this
+          const res = await this.$http.post(
+            'http://localhost:8000/assistant/process/',
+              {
+                title: this.processtitle,
+                engineer: 1,
+                status: "S1",
+                owner: 2
+              },
+              {
+                auth: {
+                  username:"test_su0",
+                  password:"!QA2ws3ed"
+                }
+              }
+          );
+          location.reload();
+          return res.data
+        }catch(e) {
+          window.console.log(e);
+        }
+      }
     }
 }
 </script>

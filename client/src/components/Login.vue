@@ -30,7 +30,7 @@
           ></v-text-field>
         </v-col>
         <v-col cols="12" sm="10" md="12">
-            <v-btn large color="primary">Login</v-btn>
+            <v-btn large color="primary" @click="login2Dsh()">Login</v-btn>
         </v-col>
       </v-col>
      </v-card-text>
@@ -48,6 +48,11 @@ export default {
           required: value => !!value || 'Required.',
           min: v => v.length >= 8 || 'Min 8 characters',   
         },
-    })
+    }),
+    methods: {
+      login2Dsh() {
+        this.$router.push(`/dsh`)
+      },
+    }
 }
 </script>

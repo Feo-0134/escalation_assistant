@@ -8,9 +8,17 @@
   >
     <v-list-item three-line>
       <v-list-item-content>
-        <div class="overline mb-4">{{comment.id}}-{{comment.engineer}}-{{comment.stageTitle}}</div>
-        <v-list-item-title class="headline mb-1">{{comment.result}}</v-list-item-title>
-        <v-list-item-subtitle>{{comment.comment_text}}</v-list-item-subtitle>
+        <div class="overline mb-4">{{comment.result}}</div>
+        <v-list-item-title class="headline mb-1">{{comment.id}}-{{comment.engineer}}-{{comment.stageTitle}}</v-list-item-title>
+        <v-list-item-subtitle class="mt-6">
+        <v-textarea
+          class="mt-4"
+          outlined
+          name="input-7-4"
+          label="Outlined textarea"
+          v-model="comment.comment_text"
+        ></v-textarea>
+        </v-list-item-subtitle>
       </v-list-item-content>
 
       <v-list-item-avatar
@@ -19,6 +27,10 @@
         color="grey"
       ></v-list-item-avatar>
     </v-list-item>
+
+    <v-card-actions>
+      <v-btn text>Save</v-btn>
+    </v-card-actions>
   </v-card>
   </v-container>
 </template>
