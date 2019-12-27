@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <!-- {{comment_list}} -->
+    <!-- {{comment}} -->
   <v-card
     class="mx-auto"
     max-width="344"
@@ -35,19 +35,25 @@ export default {
     data: ()=> ({
     }),
     computed: {
+      cmt_pk() {
+        if(this.comment_pk)
+          return this.comment_pk
+        else
+          return this.$route.path.split('/')[1]
+      }
     },
     asyncComputed: {
       comment: {
         async get() {
           try {
-            const res = await this.$http.get(`http://localhost:8000/assistant/comment/${this.comment_pk}`);
+            const res = await this.$http.get(`http://localhost:8000/assistant/comment/${this.cmt_pk}`);
             return res.data
           }catch(e) {
             // console.log(e);
           }
         },
         default () {
-            return [{fields:{title: 'undefined'}}] // for typeError: no default value
+            return {} // for typeError: no default value
         }
       }
     },
