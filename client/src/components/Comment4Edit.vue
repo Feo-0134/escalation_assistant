@@ -9,7 +9,7 @@
     <v-list-item three-line>
       <v-list-item-content>
         <div class="overline mb-4">{{comment.result}}</div>
-        <v-list-item-title class="headline mb-1">{{comment.id}}-{{comment.engineer}}-{{comment.stageTitle}}</v-list-item-title>
+        <v-list-item-title class="headline mb-1">{{comment.id}}-{{eng_Name}}-{{comment.stageTitle}}</v-list-item-title>
         <v-list-item-subtitle class="mt-6">
         <v-textarea
           class="mt-4"
@@ -21,15 +21,15 @@
         </v-list-item-subtitle>
       </v-list-item-content>
 
-      <v-list-item-avatar
+      <!-- <v-list-item-avatar
         tile
         size="80"
         color="grey"
-      ></v-list-item-avatar>
+      ></v-list-item-avatar> -->
     </v-list-item>
 
     <v-card-actions>
-      <v-btn text>Save</v-btn>
+      <v-btn text @click="updateCmt()">Save</v-btn>
     </v-card-actions>
   </v-card>
   </v-container>
@@ -41,6 +41,7 @@ export default {
         comment_pk: Number,
     },
     data: ()=> ({
+      eng_Name: '',
     }),
     computed: {
       cmt_pk() {
@@ -48,13 +49,16 @@ export default {
           return this.comment_pk
         else
           return this.$route.path.split('/')[1]
-      }
+      },
     },
     asyncComputed: {
       comment: {
         async get() {
           try {
-            const res = await this.$http.get(`http://localhost:8000/assistant/comment/${this.cmt_pk}`);
+            const res = await this.$http.get(`http://localhost:8000/assistant/comment/${this.cmt_pk}/`);
+            const eng = await this.$http.get(`http://localhost:8000/assistant/engineer/${res.data.engineer}`);
+                // console.log(res)
+                this.eng_Name = eng.data.name
             return res.data
           }catch(e) {
             // console.log(e);
@@ -63,8 +67,32 @@ export default {
         default () {
             return {} // for typeError: no default value
         }
-      }
+      },
     },
+    methods: {
+      async updateCmt() {
+        try{
+          const res = await this.$http.put(
+            `http://localhost:8000/assistant/comment/${this.cmt_pk}/`,
+              {
+                engineer: this.comment.engineer,
+                stageTitle: this.comment.stageTitle,
+                result: 'OG',
+                comment_text: this.comment.comment_text,
+              },
+              {
+                auth: {
+                  username:"test_su0",
+                  password:"!QA2ws3ed"
+                }
+              }
+          );
+          return res.data
+        }catch(e){
+          window.console.log(e)
+        }
+      }
+    }
 
 }
 </script>
